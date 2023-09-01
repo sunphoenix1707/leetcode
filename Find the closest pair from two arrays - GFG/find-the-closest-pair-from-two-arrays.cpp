@@ -6,65 +6,48 @@ using namespace std;
 // } Driver Code Ends
 //User function teamplate for C++
 
-
-       class Solution{
+class Solution{
   public:
     vector<int> printClosest(int arr[], int brr[], int n, int m, int x) {
-       //code here
-       vector<int> ans;
+        int i=0;
+       int j=m-1;
+       vector<int>ans;
        ans.push_back(-1);
        ans.push_back(-1);
-       int a,b,i,j=m-1;
-       i=0;
-       int sum;
-       int diff,mindiff=INT_MAX;
-       while(i<n && j>=0)
-       {
-           
-           a=arr[i];
-           b=brr[j];
-           sum=a+b;
-           if(sum>x)
-           {
-               diff=sum-x;
-               j--;
+       int sum=0;
+       int a=0,b=0;
+       int diff=INT_MAX;
+    int mindiff=INT_MAX;
+       while(i<n && j>=0) {
+          a=arr[i];
+          b=brr[j];
+          sum=a+b;
+           if(sum> x) {
+                diff=sum-x;
+                j--;
            }
-           else if(sum<x)
-           {
+           else if(sum<x) {
                diff=x-sum;
                i++;
            }
-           else
-           {
+           else {
                ans[0]=a;
                ans[1]=b;
                return ans;
            }
-           if(diff<=mindiff)
-           {
-               
-               if(diff!=mindiff)
-               {
-                   ans[0]=a;
-                   ans[1]=b;
-               }
-               mindiff=diff;
-                   
+           if(diff<=mindiff) {
+           if(diff!=mindiff) {
+                ans[0]=a;
+                ans[1]=b;
            }
-           
+           mindiff=diff;
+       }
            
        }
+       
        return ans;
-   }
-};      
-           
-            
-        
-      
-     
-    
-
-
+    }
+};
 
 //{ Driver Code Starts.
 
