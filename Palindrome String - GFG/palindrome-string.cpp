@@ -12,9 +12,18 @@ public:
 	
 	int isPalindrome(string S)
 	{
-	    string T=S;
-	    reverse(S.begin(),S.end());
-	    return T==S;
+	    //another way
+	    int a=0;
+	    int b=S.length()-1;
+	    while(a<=b) {
+	        if(S[a]!=S[b]) {
+	            return 0;
+	        }
+	        a++;
+	        b--;
+	        
+	    }
+	    return 1;
 	}
 
 };
