@@ -25,6 +25,12 @@ class Solution{
            
        }
        return ans;
+       //lets take example: 
+       //act,god,cat,dog,tac
+       //act -> sort -> act
+       //map - act->act,cat,tac
+       //dgo->god,dog
+       
     }
 };
 
