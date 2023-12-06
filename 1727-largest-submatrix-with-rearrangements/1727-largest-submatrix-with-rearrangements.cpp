@@ -17,6 +17,7 @@ public:
         for(auto row:mat) {
             int mn=1e9;
             for(int j=0;j<m;j++) {
+                if(!row[j]) break;
                 ans=max(ans,row[j]*(j+1));
             }
         }
