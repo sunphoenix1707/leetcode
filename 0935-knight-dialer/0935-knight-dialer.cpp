@@ -15,22 +15,28 @@ public:
         {4,2}
     };
     vector<vector<ll>> dp;
-    
-    ll solve(int rem,int digit) {
-        if(rem==0) return 1;
-        if(dp[rem][digit]!=-1) return dp[rem][digit];
-        ll ans=0;
-        for(auto nextdigit : jumps[digit]) {
-            ans=(ans+solve(rem-1,nextdigit));
-        }
-        return dp[rem][digit]= (ans%mod);
-    }
-    
+
     int knightDialer(int n) {
-        dp.resize(n+1,vector<ll>(10,-1));
-        ll ans=0;
+        dp.resize(n+1,vector<ll>(10,0));
+      
+         
+    //base case for bottom up
+    for(int digit=0;digit<10;digit++) {
+        dp[0][digit]=1;
+    }
+        
+        for(int rem=1;rem<=n-1;rem++) {
+            for(int digit=0;digit<10;digit++) {
+                  ll ans=0;
+                for(int nextdigit : jumps[digit]) {
+                    ans=(ans+dp[rem-1][nextdigit])%mod;
+                }
+                dp[rem][digit]=(ans%mod);
+            }
+        }
+          ll ans=0;
         for(int digit=0;digit<10;digit++) {
-            ans=(ans+solve(n-1,digit))%mod;
+            ans=(ans+dp[n-1][digit])%mod;
         }
         return (ans%mod);
     }
