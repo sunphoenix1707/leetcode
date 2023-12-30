@@ -1,23 +1,16 @@
 class Solution {
 public:
-    bool ispalindrome(string s, int i, int j){
-        while(i < j){
-            if(s.at(i) == s.at(j)){
-                i++;
-                j--;
-            }else return false;
+ bool ispal(string a) {
+        for(int i=0 , j=a.size()-1 ; i<j ;i++ , j--) {
+            if(a[i]!=a[j]) return false;
         }
         return true;
     }
     bool validPalindrome(string s) {
-        int i  = 0;
-        int j = s.size()-1;
-        while(i < j){
-            if(s.at(i) == s.at(j)){
-                i++;
-                j--;
-            }else{
-                return ispalindrome(s, i+1, j) || ispalindrome(s, i, j-1);
+        for(int i=0,j=s.size()-1;i<=j; i++ ,j--) {
+            if(s[i]!=s[j]) {
+                string a=s,b=s;
+                return ispal(a.erase(i,1)) || ispal(b.erase(j,1));
             }
         }
         return true;
