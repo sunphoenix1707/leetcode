@@ -9,21 +9,49 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+class Solution 
+{
 public:
-    void dfs(TreeNode* root1 , TreeNode* root2, int height)
+    TreeNode* reverseOddLevels(TreeNode* root) 
     {
-        if(root1==NULL || root2==NULL) return;
-        if(!(height%2)) {
-            swap(root1->val,root2->val);
+        if(!root) return root;
+        
+        queue<TreeNode*> q;
+        vector<int> values;
+        q.push(root);
+        int level=0;
+        
+        while(!q.empty())
+        {
+            int sz = q.size();
+            vector<int> temp;
+            for(int i=0; i<sz; i++)
+            {
+                TreeNode* node = q.front(); q.pop();
+                
+                if(level%2)
+                    node->val = values[sz-i-1];
+                
+                if(node->left)
+                {
+                    q.push(node->left);
+                    temp.push_back(node->left->val);
+                }
+                if(node->right) 
+                {
+                    q.push(node->right);
+                    temp.push_back(node->right->val);
+                }
+                
+            }
+            values = temp;
+            level++;
         }
-        dfs(root1->left, root2->right, height+1);
-        dfs(root1->right,root2->left, height+1);
+        return root;
+            
+        
     }
-     TreeNode* reverseOddLevels(TreeNode* root) {
-      dfs(root->left,root->right,0);
-         return root;
-    }
+
 
     
 };
