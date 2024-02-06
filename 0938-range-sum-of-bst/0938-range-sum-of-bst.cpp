@@ -12,17 +12,16 @@
 class Solution {
 public:
 
-         int traverse(TreeNode* root,int l,int h){
-        int n, ans=0;
-        if(root == nullptr) return 0;
-        n = root->val;
-        int left = traverse(root->left,l,h);
-        int right = traverse(root->right,l,h);
-        if(n>=l && n<=h) ans = n;
-        return left + right + ans;
+  int dfs(TreeNode* root, int l, int h) {
+        if(!root) return 0;
+        int ans = 0;
+        if(root -> val >= l && root -> val <= h) ans += root -> val;
+
+        return ans + dfs(root -> left, l, h) + dfs(root -> right, l, h);
     }
+public:
     int rangeSumBST(TreeNode* root, int low, int high) {
-        return traverse(root,low,high);
+        return dfs(root, low, high);
     }
     
 };
